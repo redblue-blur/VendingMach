@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\VendingController;
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [VendingController::class, 'view']);
+Route::get('/login',[VendingController::class, 'login']);
+Route::post('/login',[VendingController::class, 'logincheck']);
+Route::get('/select/{id}',[VendingController::class, 'select'])->name('product.select');
+
