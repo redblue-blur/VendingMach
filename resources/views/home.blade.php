@@ -26,7 +26,7 @@
   </head>
   <body>
   <div class="container border">
-    <table class="table ">
+    <table class="table">
         <thead>
             <tr>
                 <th class="num">Product_Id</th>
@@ -58,28 +58,28 @@
     <h3 id="cost"></h3>
 </div>
 <div id="payment" class="container text-center border">
-<form>
+<form id="submit" action="{{secure_url('/pay')}}" method="post">
   
   <br>
   <!-- Email input -->
   <div class="form-outline row justify-content-start">
     <div class="col-md-2">
-    <button class="btn btn-primary coin5" id="exit">coin of 5</button>
+    <input type="button" class="btn btn-primary coin5" id="exit">coin of 5</button>
     </div>
     <div class="col-md-2">
-    <button class="btn btn-primary coin10" id="exit">coin of 10</button>
+    <input type="button"  class="btn btn-primary coin10" id="exit">coin of 10</button>
     </div>
     <div class="col-md-2">
-    <button class="btn btn-primary coin20" id="exit">coin of 20</button>
+    <input type="button"  class="btn btn-primary coin20" id="exit">coin of 20</button>
     </div>
     <div class="col-md-2">
-    <button class="btn btn-primary coin50">coin of 50</button>
+    <input type="button"  class="btn btn-primary coin50">coin of 50</button>
     </div>
     <div class="col-md-2">
-    <button class="btn btn-primary coin100">coin of 100</button>
+    <input type="button"  class="btn btn-primary coin100">coin of 100</button>
     </div>
     <div class="col-md-2">
-    <button type="button" id="exit" onclick="exit()"class="btn btn-primary btn-block mb-4">Exit</button>
+    <input type="button"  type="button" id="exit" onclick="exit()"class="btn btn-primary btn-block mb-4">Exit</button>
     </div>
   </div>
   <br>
@@ -91,9 +91,11 @@
     <h3 id="total">0</h3>
     </div>
   </div>
-
+  <input type="hidden" id="id" name="id" value="">
+  <input type="hidden" id="coins" name="coins" value="">
+  <input type="hidden" id="total" name="total;" value="">
   <!-- Submit button -->
-  <button type="button" id="pay" onclick="pay()" class="btn btn-primary btn-block mb-4">Pay</button>
+  <input type="button" id="pay" class="btn btn-primary btn-block mb-4">Pay</button>
 
   <h3 id="transation"></h3>
   </div>
@@ -104,7 +106,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ secure_asset('/js/jquery.validate.min.js') }}"></script>
-<script src="{{ secure_asset('/js/additional-methods.min.js') }}"></script>
+<!-- <script src="{{ secure_asset('/js/additional-methods.min.js') }}"></script> -->
 <script>
 let total = 0;
 const coins = [0, 0, 0, 0, 0];
@@ -112,46 +114,60 @@ $(document).ready(function(){
 
   $(".select").click(function() {
       $("#payment").show();
-      console.log('price = '+$(this).attr('data-price'));
       let price=$(this).attr('data-price');
-      
+      let id=$(this).attr('data-id');
+      console.log('price = '+price+' & id = '+id);
       $("#cost").html("Cost of product "+$(this).attr('data-id')+":-"+price);  
   });
-  $("#coin5").click(function(e) {
+  $(".coin5").click(function() {
     total=total+5;
-    coins[0]=coins[0]+1
+    coins[0]=coins[0]+1;
+    console.log("coin5");
     document.getElementById("total").innerHTML = total;
   });
-  $("#coin10").click(function(e) {
+  $(".coin10").click(function() {
     total=total+10;
-    coins[0]=coins[0]+1
+    coins[0]=coins[0]+1;
+    console.log("coin10");
     document.getElementById("total").innerHTML = total;
   });
-  $("#coin20").click(function(e) {
+  $(".coin20").click(function() {
     total=total+20;
-    coins[0]=coins[0]+1
+    coins[0]=coins[0]+1;
+    console.log("coin20");
     document.getElementById("total").innerHTML = total;
   });
-  $("#coin50").click(function(e) {
+  $(".coin50").click(function() {
     total=total+50;
-    coins[0]=coins[0]+1
+    coins[0]=coins[0]+1;
+    console.log("coin50");
     document.getElementById("total").innerHTML = total;
   });
-  $("#coin100").click(function(e) {
+  $(".coin100").click(function() {
     total=total+100;
-    coins[0]=coins[0]+1
+    coins[0]=coins[0]+1;
+    console.log("coin100");
     document.getElementById("total").innerHTML = total;
   });
-  $("#exit").click(function(e) {
-    console.log("yo");
+  $("#exit").click(function() {
     total=0;
-    coins = [0, 0, 0, 0, 0]
+    coins = [0, 0, 0, 0, 0];
+    console.log("Empty");
     document.getElementById("total").innerHTML = total;
   });
   $("#pay").click(function(e) {
-    if (price <= total) {
+    console.log('pay')
+    $("#total").val(total);
+    $("#coins").val(coins);
+    $("#id").val(id);
+    if (price >= total) {
       let diff =price-total;
       document.getElementById("transation").innerHTML = "add :-"+diff;
+    }
+    else{  
+      console.log("payment");
+      // window.location.href = 'newPage.html';
+      document.getElementById("submit").submit();
     }
   });
 });
