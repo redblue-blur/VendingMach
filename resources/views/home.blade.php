@@ -58,7 +58,7 @@
     <h3 id="cost"></h3>
 </div>
 <div id="payment" class="container text-center border">
-<form id="submit" action="{{secure_url('/pay')}}" method="post">
+<form id="submit" action="{{ secure_url('/pay') }}" method="post">
   
   <br>
   <!-- Email input -->
@@ -67,19 +67,19 @@
     <input type="button" class="btn btn-primary coin5" id="exit">coin of 5</button>
     </div>
     <div class="col-md-2">
-    <input type="button"  class="btn btn-primary coin10" id="exit">coin of 10</button>
+    <input type="button"  class="btn btn-primary coin10" placeholder="coin of 10">
     </div>
     <div class="col-md-2">
-    <input type="button"  class="btn btn-primary coin20" id="exit">coin of 20</button>
+    <input type="button"  class="btn btn-primary coin20" value="coin of 20">
     </div>
     <div class="col-md-2">
-    <input type="button"  class="btn btn-primary coin50">coin of 50</button>
+  </input type="button"  class="btn btn-primary coin50" value="coin of 50">
     </div>
     <div class="col-md-2">
-    <input type="button"  class="btn btn-primary coin100">coin of 100</button>
+    <input type="button"  class="btn btn-primary coin100" value="coin of 100">
     </div>
     <div class="col-md-2">
-    <input type="button"  type="button" id="exit" onclick="exit()"class="btn btn-primary btn-block mb-4">Exit</button>
+    <input type="button"  type="button" id="exit" onclick="exit()"class="btn btn-primary btn-block mb-4" value="Exit">
     </div>
   </div>
   <br>
@@ -95,9 +95,9 @@
   <input type="hidden" id="coins" name="coins" value="">
   <input type="hidden" id="total" name="total;" value="">
   <!-- Submit button -->
-  <input type="button" id="pay" class="btn btn-primary btn-block mb-4">Pay</button>
+  <input type="button" id="pay" class="btn btn-primary btn-block mb-4" value="Pay">
 
-  <h3 id="transation"></h3>
+  <h3 id="insuff"></h3>
   </div>
 </form>
 </div>
@@ -160,13 +160,13 @@ $(document).ready(function(){
     $("#total").val(total);
     $("#coins").val(coins);
     $("#id").val(id);
-    if (price >= total) {
+    if (price > total) {
       let diff =price-total;
-      document.getElementById("transation").innerHTML = "add :-"+diff;
+      console.log('diff')
+      document.getElementById("insuff").innerHTML = "add :-"+diff;
     }
     else{  
       console.log("payment");
-      // window.location.href = 'newPage.html';
       document.getElementById("submit").submit();
     }
   });

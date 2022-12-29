@@ -17,11 +17,21 @@ class VendingController extends Controller
         $data = compact('products','product');
         return view('home')->with($data);
     }
-    public function select($id)
+    public function select(Request $request)
     {
-        $product = Product::find($id);
-        $data = compact('product');
-        return redirect('customer/view');
+        Log::info("inside input");
+        Log::info($request);
+        $id=$request["id"];
+        $id=$request["id"];
+        $id=$request["id"];
+        $email = Email::where('email', $request["emailcheck"])->first();
+        // $email = DB::table('email')->where('email', $request['emailcheck'])->first();
+
+        $x=json_decode(json_encode($email), true);
+        Log::info($x);
+        // $data=compact('title','email');
+        $data=array($title, $email);
+        return view('input')->with('data',$data);
     }
     public function dashboardview()
     {
