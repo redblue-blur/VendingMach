@@ -14,7 +14,9 @@
   <div class="container border">
     <p>Transaction failed</p>
     <p>Here is your Change</p>
+    {{$change}}
     <p>Here is your Product</p>
+    {{$product->name}}
   </div>
   </body>
 <!-- JavaScript Bundle with Popper -->

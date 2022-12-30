@@ -93,7 +93,6 @@
   </div>
   <input type="hidden" id="id" name="id" value="">
   <input type="hidden" id="coins" name="coins" value="">
-  <input type="hidden" id="total" name="total" value="">
   <!-- Submit button -->
   <input type="button" id="pay" class="btn btn-primary btn-block mb-4" value="Pay">
 
@@ -113,7 +112,6 @@ const coins = [0, 0, 0, 0, 0];
 $(document).ready(function(){
   let price = 0;
   let id=0;
-  let total=0;
   $(".select").click(function() {
       $("#payment").show();
       price=$(this).attr('data-price');
@@ -159,7 +157,6 @@ $(document).ready(function(){
   });
   $("#pay").click(function(e) {
     console.log('pay')
-    $("#total").val(total);
     $("#coins").val(coins);
     $("#id").val(id);
     if (price > total) {

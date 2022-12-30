@@ -17,5 +17,5 @@ use App\Models\Product;
 Route::get('/', [VendingController::class, 'view']);
 Route::get('/login',[VendingController::class, 'login']);
 Route::post('/login',[VendingController::class, 'logincheck']);
-Route::post('/pay',[VendingController::class, 'select'])->name('product.select');
+Route::post('/pay',[VendingController::class, 'select']);
 
